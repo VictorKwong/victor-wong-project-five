@@ -1,0 +1,14 @@
+
+
+MVP:
+1. Have user input to select their Pokemon
+2. API correct extraction, and show selected Pokemon
+3. User can select other Pokemon
+
+Stretch Goals:
+1. Create an NPC that can select their Pokemon
+2. User's Pokemon and NPC Pokemon battle their Pokemon stats
+3. Show Battle result
+
+Reference:
+https://downloads.khinsider.com/game-soundtracks/album/pokemon-yellow-gb

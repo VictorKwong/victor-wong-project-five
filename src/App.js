@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Header from './components/Header';
+import Main from './components/Main';
+import Music from './components/Music';
+import Footer from './components/Footer';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{  
+
+/* 
+  componentDidMount(){
+    axios({
+      url: this.state.originLink,
+      method: 'GET',
+      responseType: 'JSON'
+    }).then((x) => {
+      console.log('gg');
+      console.log(x);
+    })
+  } */
+
+/* https://pokemoncries.com/cries-old/3.mp3 */
+
+
+
+  render(){
+    return (
+      <div className="wrapper">
+          <Header />
+          <Main />
+          <Music />
+          <Footer />
+      </div>
+    );
+  
+  }
 }
 
 export default App;
