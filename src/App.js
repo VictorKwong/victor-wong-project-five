@@ -23,9 +23,11 @@ class App extends Component{
 
   render(){
     return (
-      <div className="wrapper">
-          <Header />
-          <Main />
+      <div className="wrapper pageFix">
+          <div className="allWrapping">
+            <Header />
+            <Main />
+          </div>
           <Footer />
       </div>
     );

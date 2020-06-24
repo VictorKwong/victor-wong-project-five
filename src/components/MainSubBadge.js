@@ -25,49 +25,49 @@ class MainSubBadge extends Component{
                         </div>
                     </div>
                     <div>
-                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Cerulean">2.Cerulean</button>
+                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Cerulean" className="gymButton">2.Cerulean</button>
                         <div className="imgSize">
                             <img src={cascade} className="badgeOne" alt="Cascade badge"/>
                             {this.props.stageClear2 ? <img src={checkmark} className="checkmark" alt="Check mark"/> : null}
                         </div>
                     </div>
                     <div>
-                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Vermillion">3.Vermillion</button>
+                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Vermillion" className="gymButton">3.Vermillion</button>
                         <div className="imgSize">
                             <img src={thunder} className="badgeOne" alt="Thunder badge"/>
                             {this.props.stageClear3 ? <img src={checkmark} className="checkmark" alt="Check mark"/> : null}
                         </div>
                     </div>
                     <div>
-                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Celadon">4.Celadon</button>
+                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Celadon" className="gymButton">4.Celadon</button>
                         <div className="imgSize">
                             <img src={rainbow} className="badgeOne" alt="Rainbow badge"/>
                             {this.props.stageClear4 ? <img src={checkmark} className="checkmark" alt="Check mark"/> : null}
                         </div>
                     </div>
                     <div>
-                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Fuchsia">5.Fuchsia</button>
+                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Fuchsia" className="gymButton">5.Fuchsia</button>
                         <div className="imgSize">
                             <img src={soul} className="badgeOne" alt="Soul badge"/>
                             {this.props.stageClear5 ? <img src={checkmark} className="checkmark" alt="Check mark"/> : null}
                         </div>
                     </div>
                     <div>
-                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Saffron">6.Saffron</button>
+                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Saffron" className="gymButton">6.Saffron</button>
                         <div className="imgSize">
                             <img src={marsh} className="badgeOne" alt="Marsh badge"/>
                             {this.props.stageClear6 ? <img src={checkmark} className="checkmark" alt="Check mark"/> : null}
                         </div>
                     </div>
                     <div>
-                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Cinnabar">7.Cinnabar</button>
+                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Cinnabar" className="gymButton">7.Cinnabar</button>
                         <div className="imgSize">
                             <img src={volcano} className="badgeOne" alt="Volcano badge"/>
                             {this.props.stageClear7 ? <img src={checkmark} className="checkmark" alt="Check mark"/> : null}
                         </div>
                     </div>
                     <div>   
-                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Viridian">8.Viridian</button>
+                        <button disabled={this.props.disabledSelectEnemy} onClick={this.props.challengeClick} value="Viridian" className="gymButton">8.Viridian</button>
                         <div className="imgSize">
                             <img src={earth} className="badgeOne" alt="Earth badge"/>
                             {this.props.stageClear8 ? <img src={checkmark} className="checkmark" alt="Check mark"/> : null}

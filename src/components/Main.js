@@ -435,7 +435,7 @@ audioRestart = new Audio();
                 />
 
 
-                <button onClick={this.enemyAttack}>EnemyAtk</button>
+                {/* <button onClick={this.enemyAttack}>EnemyAtk</button> */}
                 
                 <MainSubBadge challengeClick={this.challengeClick} disabledSelectEnemy={this.state.disabledSelectEnemy}
                 stageClear1={this.state.stageClear1} stageClear2={this.state.stageClear2}
