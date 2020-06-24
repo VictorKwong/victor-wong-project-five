@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Result = (data) =>{
-    return(
+class Result extends Component{
+    render(){
+        return(
         <div>
-            <h1>{data.final}</h1>
+            { this.props.final === true ? <p>You Won the Battle!</p> : this.props.final === false ? <p>Opps..Try Again!</p> : null }
         </div>
-    )
+        )
+    }
 }
-
 export default Result;

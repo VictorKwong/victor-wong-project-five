@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import DisplayPoke from './DisplayPoke';
 import axios from 'axios';
-import Result from './Result';
+import DisplayPoke from './DisplayPoke';
+import MusicControl  from './MusicControl';
 import brock from '../assets/images/brock.png'
 import misty from '../assets/images/misty.png'
 import surge from '../assets/images/surge.png'
@@ -10,43 +10,65 @@ import koga from '../assets/images/koga.png'
 import sabrina from '../assets/images/sabrina.png'
 import blaine from '../assets/images/blaine.png'
 import giovanni from '../assets/images/giovanni.png'
-import boulder from '../assets/images/boulderBadge.png'
-import cascade from '../assets/images/cascadeBadge.png'
-import thunder from '../assets/images/thunderBadge.png'
-import rainbow from '../assets/images/rainbowBadge.png'
-import soul from '../assets/images/soulBadge.png'
-import marsh from '../assets/images/marshBadge.png'
-import volcano from '../assets/images/volcanoBadge.png'
-import earth from '../assets/images/earthBadge.png'
+import teamRocket from '../assets/images/rocket.png'
+import MainSubBadge from './MainSubBadge'
+import restart from '../assets/audio/pokemonRecovery.mp3'
+import MainSubBattleUI from './MainSubBattleUI';
 
 class Main extends Component{
     constructor(){
-        super();
+        super()
         this.state = {
-          userPokeID: 0,
-          userTyping: '',
-          originLink: 'https://pokeapi.co/api/v2/pokemon/',
-          pokemonAllData: '',
-          health: '',
-          typeOne: '',
-          typeTwo: '',
-          pokemonCries: '',
-          loading: true,
-          enemyLink: 'https://pokeapi.co/api/v2/pokemon/',
-          enemyPokemonAllData: '',
-          enemyhealth: '',
-          enemyTypeOne: '',
-          enemyTypeTwo: '',
-          enemyPokemonCries: '',
-          enemyLoading: true,
-          enemyTrainer: '',
-          enemyImage:'',
-          results: '',
-          critial: false,
+            /* changing */
+            userPokeID: 0,
+            userTyping: '',
+            originLink: 'https://pokeapi.co/api/v2/pokemon/',
+            pokemonAllData: '',
+            health: '',
+            typeOne: '',
+            typeTwo: '',
+            pokemonCries: '',
+            typeError: '',
+            loading: true,
+            enemyLink: 'https://pokeapi.co/api/v2/pokemon/',
+            enemyPokemonAllData: '',
+            enemyHealth: '',
+            enemyTypeOne: '',
+            enemyTypeTwo: '',
+            enemyPokemonCries: '',
+            enemyLoading: true,
+            enemyTrainer: '',
+            enemyImage:'',
+            critial: false,
+            enemyCritial: false,
+            startButton: false,
+            disabledUserChoiceButton: false,
+            disabledSelectEnemy:false,
+            damage: '',
+            enemyDamage:'',
+            final: '',
+            enemyDecision: '',
+            playerDecision: '',
+            reSrc: restart,
+            stageClear1:false,
+            stageClear2:false,
+            stageClear3:false,
+            stageClear4:false,
+            stageClear5:false,
+            stageClear6:false,
+            stageClear7:false,
+            stageClear8:false,
         }
       }
 
-    componentDidUpdate(prevProps, prevState) {
+
+audioRestart = new Audio();
+
+    componentDidMount(){
+        this.audioRestart.src = this.state.reSrc
+        this.audioRestart.volume = 0.1
+    }
+    async componentDidUpdate(prevProps, prevState) {
         if (prevState.originLink !== this.state.originLink) {
           console.log('pokemons state has changed.')
           axios({
@@ -54,38 +76,32 @@ class Main extends Component{
             method: 'GET',
             responseType: 'JSON'
           }).then((x) => {
-            console.log('gg22');
-            x.data.types.length === 2 ? 
-              this.setState ({typeTwo: x.data.types[1].type.name}): 
-              this.setState ({typeTwo: ''})  
+            x.data.types.length === 2 ? this.setState ({typeTwo: x.data.types[1].type.name}): this.setState ({typeTwo: ''})
+            x.data.id <= 649 ? this.setState ({pokemonCries: 'https://pokemoncries.com/cries-old/' + x.data.id +'.mp3'}): this.setState({pokemonCries:''})
             this.setState({
               pokemonAllData: x.data,
               typeOne: x.data.types[0].type.name,
-              pokemonCries: 'https://pokemoncries.com/cries-old/' + x.data.id +'.mp3',
               loading: false,
               health: x.data.stats[0].base_stat,
             })
-            console.log(x.data);
-          })
+          }).catch(() => {
+            this.setState({ typeError: 'I cannot find this pokemon=.=...'})
+            })
         }
         if(prevState.enemyLink !== this.state.enemyLink){
-          axios({
+          let x = await axios({
             url: this.state.enemyLink,
             method: 'GET',
             responseType: 'JSON'
-          }).then((x) => {
-            x.data.types.length === 2 ? 
-              this.setState ({enemyTypeTwo: x.data.types[1].type.name}): 
-              this.setState ({enemyTypeTwo: ''})  
+          })
+            x.data.types.length === 2 ? this.setState ({enemyTypeTwo: x.data.types[1].type.name}): this.setState ({enemyTypeTwo: ''})
+            x.data.id <= 649 ? this.setState ({enemyPokemonCries: 'https://pokemoncries.com/cries-old/' + x.data.id +'.mp3'}): this.setState({enemyPokemonCries:''})
             this.setState({
               enemyPokemonAllData: x.data,
               enemyTypeOne: x.data.types[0].type.name,
-              enemyPokemonCries: 'https://pokemoncries.com/cries-old/' + x.data.id +'.mp3',
               enemyLoading: false,
-              enemyhealth: x.data.stats[0].base_stat,
+              enemyHealth: x.data.stats[0].base_stat,
             })
-            console.log(x.data);
-          })
         }
     }
         
@@ -101,15 +117,18 @@ class Main extends Component{
         copyUserTyping.charAt(0) === '0' ? 
             copyUserTyping = parseInt(this.state.userTyping) : 
             copyUserTyping = this.state.userTyping.toLowerCase()
-        if( copyUserTyping !== ''){
+        if(copyUserTyping !== ''){
             this.setState({
                 userPokeID: copyUserTyping,
                 originLink: 'https://pokeapi.co/api/v2/pokemon/' + copyUserTyping,
                 userTyping: '',
+                typeError: ''
+            })
+        }else{
+            this.setState({
+                typeError: 'Select a valid pokemon! Ex. 807'
             })
         }
-    console.log(this.state.userPokeID);
-    console.log(this.state.originLink);
     }
 
     challengeClick = (enemy) => {
@@ -172,49 +191,178 @@ class Main extends Component{
               enemyImage: giovanni,
             })
         }else{
-            let random = Math.floor(Math.random() * 806) + 1;
+            const meetWild = this.randomfunction()
+            if(meetWild <= 0.9){
+            const random = Math.floor(Math.random() * 806) + 1;
             this.setState({
                 enemyLink:'https://pokeapi.co/api/v2/pokemon/' + random,
                 enemyPokemonCries: 'https://pokemoncries.com/cries-old/' + random + '.mp3',
                 enemyTrainer: '',
                 enemyImage: '',
             })
-        }
-    }
-
-    
-    fightClick = (fight) => {
-        fight.preventDefault();
-        if(this.state.pokemonAllData !== '' && this.state.enemyPokemonAllData !== ''){
-            
-            if(this.state.pokemonAllData.stats[1].base_stat> this.state.enemyPokemonAllData.stats[1].base_stat){
-            this.setState ({ results: 'win' })
-            } else if(this.state.pokemonAllData.stats[1].base_stat < this.state.enemyPokemonAllData.stats[1].base_stat){
-            this.setState ({ results: 'lose' })
-            } else {
-            this.setState ({ results: 'tie' })
+            }else{
+                this.setState({
+                    enemyLink: 'https://pokeapi.co/api/v2/pokemon/meowth',
+                    enemyPokemonCries: 'https://pokemoncries.com/cries-old/52.mp3',
+                    enemyTrainer: 'Team Rocket',
+                    enemyImage: teamRocket,
+                })
             }
         }
     }
 
-    /* test */
-    addHealth = (add) => {
-        add.preventDefault();
-        this.setState ({ health: this.state.health + 5 })
+    /* start battle button */
+    startClick = (start) => {
+        start.preventDefault()
+        this.setState ({ 
+            startButton: !this.state.startButton,
+            restart: false,
+            disabledSelectEnemy: true,
+         })
     }
-    attack = (attack) => {
-        attack.preventDefault();
-        this.setState ({ critial : false })
-        let damage = Math.round((0.5 * (this.state.pokemonAllData.stats[1].base_stat / this.state.enemyPokemonAllData.stats[2].base_stat)) + 1)
-        let random = (Math.random() * 1);
-        if( random <= 0.15){
-            damage = Math.round(damage * 1.5)
-            this.setState ({ critial : true })
+    /* user interface: Attack and Heal */
+
+    /* Heal up and pass enemy turn */
+    heal = (add) => {
+        add.preventDefault()
+        this.setState ({ disabledUserChoiceButton: true })
+        const copyOfHeal = this.state.health + 5
+        if (copyOfHeal <= this.state.pokemonAllData.stats[0].base_stat){
+            this.setState ({ health: copyOfHeal })
+        }else{
+            this.setState ({ health: this.state.pokemonAllData.stats[0].base_stat})
         }
-        console.log(random);
-        this.setState ({ enemyhealth: this.state.enemyhealth - damage})
+            this.setState ({ playerDecision: 'heal' })
+        this.enemyChoice()
     }
 
+    /* reset crit and user interface button */
+    /* if enemy die shows "you won", else enemy turn */
+    attack = (attack) => {
+        attack.preventDefault()
+        this.setState ({ 
+            disabledUserChoiceButton: true,
+            critial : false
+        })
+        const randomDamage = this.randomfunction()
+        let damage = Math.round(((1.2 * (this.state.pokemonAllData.stats[1].base_stat / this.state.enemyPokemonAllData.stats[2].base_stat)) + 1) * 1.2 * (1.3 + randomDamage))
+        const randomCrit = this.randomfunction()
+        if( randomCrit <= 0.2){
+            damage = Math.round(damage * 2)
+            this.setState ({ critial : true })
+        }
+        console.log(randomCrit);
+        let copyOfEnemyHealth = this.state.enemyHealth - damage
+        this.setState ({ 
+            enemyHealth: copyOfEnemyHealth, 
+            damage: damage,
+            playerDecision: 'attack'
+        })
+        if( copyOfEnemyHealth <= 0 ){
+            this.setState ({ final: true })
+            if(this.state.enemyTrainer === 'Brock'){
+                this.setState ({ stageClear1: true })
+            }else if(this.state.enemyTrainer === 'Misty'){
+                this.setState ({ stageClear2: true })
+            }else if(this.state.enemyTrainer === 'Lt. Surge'){
+                this.setState ({ stageClear3: true })
+            }else if(this.state.enemyTrainer === 'Erika'){
+                this.setState ({ stageClear4: true })
+            }else if(this.state.enemyTrainer === 'Koga'){
+                this.setState ({ stageClear5: true })
+            }else if(this.state.enemyTrainer === 'Sabrina'){
+                this.setState ({ stageClear6: true })
+            }else if(this.state.enemyTrainer === 'Blaine'){
+                this.setState ({ stageClear7: true })
+            }else if(this.state.enemyTrainer === 'Giovanni'){
+                this.setState ({ stageClear8: true })
+            }           
+        }else{
+            this.enemyChoice()
+        }
+    }
+
+    /* Enemy */
+
+    /* enemy choice have 75% chance to attack and 25% chance to heal */
+    enemyChoice = () =>{
+        if (this.randomfunction() <= 0.75){
+            const timer = setTimeout(() => this.enemyAttack(), 500);
+            return () => clearTimeout(timer);
+        }else if(this.randomfunction() <= 0.95){
+            const timer = setTimeout(() => this.enemyHeal(), 500);
+            return () => clearTimeout(timer);
+        }else{
+            const timer = setTimeout(() => this.enemyNothing(), 500);
+            return () => clearTimeout(timer);
+        }
+    }
+
+    /* reset enemyCritial, disable user interface*/
+    /* if player die shows ("Try again" & disable user interface), else player turn */
+    enemyAttack = () =>{
+        this.setState ({ enemyCritial : false })
+        const randomDamage = this.randomfunction()
+        let damage = Math.round(((1.2 * (this.state.pokemonAllData.stats[1].base_stat / this.state.enemyPokemonAllData.stats[2].base_stat)) + 1) * (1.3 + randomDamage))
+        const randomCrit = this.randomfunction()
+        if( randomCrit <= 0.05){
+            damage = Math.round(damage * 2)
+            this.setState ({ enemyCritial : true })
+        }
+        const copyOfEnemyHealth = this.state.health - damage
+        this.setState ({ 
+            health: copyOfEnemyHealth,
+            enemyDamage: damage,
+            disabledUserChoiceButton: false,
+            enemyDecision: 'enemyAtk'
+        })
+        if( copyOfEnemyHealth <= 0 ){
+            this.setState ({ 
+                final: false,
+                disabledUserChoiceButton: true,
+            })
+        }
+    }
+
+    /* enemy heal up and pass player turn */
+    enemyHeal = () => {
+        if (this.state.enemyHealth + 2 <= this.state.enemyPokemonAllData.stats[0].base_stat){
+            this.setState ({ enemyHealth: this.state.enemyHealth + 2 })
+        }else{
+            this.setState ({ enemyHealth: this.state.enemyPokemonAllData.stats[0].base_stat})
+        }
+        this.setState ({ 
+            disabledUserChoiceButton: false,
+            enemyDecision: 'enemyHeal'
+        })
+    }
+
+    enemyNothing = () => {
+        this.setState ({ 
+            disabledUserChoiceButton: false,
+            enemyDecision: 'enemyNothing'
+        })
+    }
+
+    randomfunction = () => {
+        return (Math.random() * 1)
+    }
+
+    restart = (e) => {
+        e.preventDefault()
+        this.setState({
+            startButton: false,
+            health: this.state.pokemonAllData.stats[0].base_stat,
+            enemyHealth: this.state.enemyPokemonAllData.stats[0].base_stat,
+            final: '',
+            disabledUserChoiceButton: false,
+            disabledSelectEnemy: false,
+            enemyDecision: '',
+            playerDecision: '',
+        })
+        this.audioRestart.play()
+        this.audioRestart.autoplay = true
+    }
 
     render(){
         return(
@@ -223,12 +371,13 @@ class Main extends Component{
                 <div>
                     <h2>Player's Pokemon</h2>
                     {
-                    this.state.loading ? <p>Please choose your Pokemon(Ex. "1" / "bulbasaur")</p> : 
-                    <DisplayPoke
+                    this.state.loading ? <p>Choose your Pokemon(Ex. "1" / "bulbasaur")</p>
+                    : <DisplayPoke
                         key={this.state.pokemonAllData.id}
                         name={this.state.pokemonAllData.name}
                         id={this.state.pokemonAllData.id}
                         hp={this.state.health}
+                        maxhp={this.state.pokemonAllData.stats[0].base_stat}
                         attack={this.state.pokemonAllData.stats[1].base_stat}
                         defence={this.state.pokemonAllData.stats[2].base_stat}
                         special={(this.state.pokemonAllData.stats[3].base_stat + this.state.pokemonAllData.stats[4].base_stat) / 2}
@@ -240,20 +389,25 @@ class Main extends Component{
                     />
                     }
                     <form className="userInputBox" >
-                        <input type="text" name='userPokeID' size="10" maxLength="11" placeholder="I choose you!" onChange={this.userChange} value={this.state.userTyping}/>
-                        <input type="submit" value="Throw Pokeball" onClick={this.userClick}/>
+                        <input type="text" name='userPokeID' placeholder="I choose you!" onChange={this.userChange} value={this.state.userTyping} disabled={this.state.disabledSelectEnemy} className="inputBoxPlace"/>
+                        <input type="submit" value="Throw Pokeball" onClick={this.userClick} disabled={this.state.disabledSelectEnemy} className="wildButton" />
                     </form>
+                    {this.state.typeError !== '' ? <p className="userInputBox">{this.state.typeError}</p> : null}
                 </div>
                 
                 <div>
-                    <h2>CPU Pokemon</h2>
+                    <div className="cpuPokemon">
+                        <h2>CPU Pokemon</h2>
+                        <button disabled={this.state.disabledSelectEnemy} onClick={this.challengeClick} className="wildButton">Wild Pokemon?</button>
+                    </div>
                     {
-                        this.state.enemyLoading ? <p>Pick you enemy</p> : 
-                    <DisplayPoke
+                    this.state.enemyLoading ? <p>Pick you enemy!?</p>  
+                    : <DisplayPoke
                         key={'player' + this.state.enemyPokemonAllData.id}
                         name={this.state.enemyPokemonAllData.name}
                         id={this.state.enemyPokemonAllData.id}
-                        hp={this.state.enemyhealth}
+                        hp={this.state.enemyHealth}
+                        maxhp={this.state.enemyPokemonAllData.stats[0].base_stat}
                         attack={this.state.enemyPokemonAllData.stats[1].base_stat}
                         defence={this.state.enemyPokemonAllData.stats[2].base_stat}
                         special={(this.state.enemyPokemonAllData.stats[3].base_stat + this.state.enemyPokemonAllData.stats[4].base_stat) / 2}
@@ -265,54 +419,31 @@ class Main extends Component{
                     />
                     }
                     <div className="enemyInfo">
-                    <img src={this.state.enemyImage} alt={this.state.enemyTrainer}/>
-                    <p>Gym Leader: {this.state.enemyTrainer}</p>
-                    <div className="wild">
-                        <button onClick={this.challengeClick}>Wild Pokemon</button>
-                    </div>
+                        <img src={this.state.enemyImage} alt={this.state.enemyTrainer}/>
+                        {this.state.enemyTrainer !== '' && this.state.enemyTrainer !== 'Team Rocket' ? <p>Gym Leader: {this.state.enemyTrainer}</p> : this.state.enemyTrainer === 'Team Rocket' ? <p>{this.state.enemyTrainer}</p> : null}
                     </div>
                 </div>
                 </section>
-                <div className="selectStage">
-                    <button onClick={this.challengeClick} value="Pewter">Pewter</button>
-                    <button onClick={this.challengeClick} value="Cerulean"> Cerulean</button>
-                    <button onClick={this.challengeClick} value="Vermillion">Vermillion</button>
-                    <button onClick={this.challengeClick} value="Celadon">Celadon</button>
-                    <div className="imgSize">
-                        <img src={boulder} className="badgeOne" alt="Boulder Badge"/>
-                    </div>
-                    <div className="imgSize">
-                        <img src={cascade} className="badgeOne" alt="Cascade Badge"/>
-                    </div>
-                    <div className="imgSize">
-                        <img src={thunder} className="badgeOne" alt="Thunder Badge"/>
-                    </div>
-                    <div className="imgSize">
-                        <img src={rainbow} className="badgeOne" alt="Rainbow Badge"/>
-                    </div>
-                    <button onClick={this.challengeClick} value="Fuchsia">Fuchsia</button>
-                    <button onClick={this.challengeClick} value="Saffron">Saffron</button>
-                    <button onClick={this.challengeClick} value="Cinnabar">Cinnabar</button>
-                    <button onClick={this.challengeClick} value="Viridian">Viridian</button>
-                    <div className="imgSize">
-                        <img src={soul} className="badgeOne" alt="Soul Badge"/>
-                    </div>
-                    <div className="imgSize">
-                        <img src={marsh} className="badgeOne" alt="Marsh Badge"/>
-                    </div>
-                    <div className="imgSize">
-                        <img src={volcano} className="badgeOne" alt="Volcano Badge"/>
-                    </div>
-                    <div className="imgSize">
-                        <img src={earth} className="badgeOne" alt="Earth Badge"/>
-                    </div>
-                </div>
+                
+                <MainSubBattleUI
+                    pokemonAllData={this.state.pokemonAllData} enemyPokemonAllData={this.state.enemyPokemonAllData} startButton={this.state.startButton} startClick={this.startClick}
+                    disabledUserChoiceButton={this.state.disabledUserChoiceButton} attack={this.attack} heal={this.heal}
+                    playerDecision={this.state.playerDecision} damage={this.state.damage} critial={this.state.critial} health={this.state.health}
+                    enemyDecision={this.state.enemyDecision} enemyDamage={this.state.enemyDamage} enemyCritial={this.state.enemyCritial} enemyHealth={this.state.enemyHealth}
+                    /* result */
+                    final={this.state.final} restart={this.restart}
+                />
 
-        <button onClick={this.fightClick}>Fight</button>
-        <button onClick={this.attack}>Attack</button>
-        {this.state.critial ? <p>Critial Hit!</p> : null}
-        {/* <button onClick={this.add}>++</button> */}
-        <Result key="1" final={this.state.results}/>
+
+                <button onClick={this.enemyAttack}>EnemyAtk</button>
+                
+                <MainSubBadge challengeClick={this.challengeClick} disabledSelectEnemy={this.state.disabledSelectEnemy}
+                stageClear1={this.state.stageClear1} stageClear2={this.state.stageClear2}
+                stageClear3={this.state.stageClear3} stageClear4={this.state.stageClear4}
+                stageClear5={this.state.stageClear5} stageClear6={this.state.stageClear6}
+                stageClear7={this.state.stageClear7} stageClear8={this.state.stageClear8}
+                />
+                <MusicControl startButton={this.state.startButton} final={this.state.final} enemyTrainer={this.state.enemyTrainer} restart={this.state.restart} />
             </main>
         )
     }

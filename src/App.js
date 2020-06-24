@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
-import Music from './components/Music';
 import Footer from './components/Footer';
 
 class App extends Component{  
@@ -27,7 +26,6 @@ class App extends Component{
       <div className="wrapper">
           <Header />
           <Main />
-          <Music />
           <Footer />
       </div>
     );

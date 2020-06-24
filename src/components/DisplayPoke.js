@@ -9,7 +9,7 @@ const DisplayPoke = (data) =>{
                 </div>
                 <div className="displayBoxFirst styleTextU">
                     <p>{data.name}</p>
-                    <p className="hpBar">Hp: {data.hp}</p>
+                    <p className="hpBar">Hp: {data.hp}/{data.maxhp}</p>
                     <p>status/ok</p>
                     <div className="hpBarDecor"></div>
                 </div>
@@ -29,7 +29,7 @@ const DisplayPoke = (data) =>{
                     <p>type2:</p>
                     <p className="hpBar">{data.type2}</p>
                 </div>
-            <audio autoPlay src={data.audioSrc} type="audio/mp3"></audio>
+                {data.id <= 649 ? <audio autoPlay src={data.audioSrc} type="audio/mp3"></audio> : null}
         </div>
     )
 }
