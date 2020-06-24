@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/victor-wong-project-five/static/css/main.767dfc61.chunk.css",
+    "main.css": "/victor-wong-project-five/static/css/main.88e24379.chunk.css",
     "main.js": "/victor-wong-project-five/static/js/main.9ec3b345.chunk.js",
     "main.js.map": "/victor-wong-project-five/static/js/main.9ec3b345.chunk.js.map",
     "runtime-main.js": "/victor-wong-project-five/static/js/runtime-main.9f7f1305.js",
@@ -8,9 +8,9 @@
     "static/js/2.118ee2db.chunk.js": "/victor-wong-project-five/static/js/2.118ee2db.chunk.js",
     "static/js/2.118ee2db.chunk.js.map": "/victor-wong-project-five/static/js/2.118ee2db.chunk.js.map",
     "index.html": "/victor-wong-project-five/index.html",
-    "precache-manifest.aef012a72bc2b10087089c907453819d.js": "/victor-wong-project-five/precache-manifest.aef012a72bc2b10087089c907453819d.js",
+    "precache-manifest.afd6bfe84afdfca1948ab6ad39f8d2c8.js": "/victor-wong-project-five/precache-manifest.afd6bfe84afdfca1948ab6ad39f8d2c8.js",
     "service-worker.js": "/victor-wong-project-five/service-worker.js",
-    "static/css/main.767dfc61.chunk.css.map": "/victor-wong-project-five/static/css/main.767dfc61.chunk.css.map",
+    "static/css/main.88e24379.chunk.css.map": "/victor-wong-project-five/static/css/main.88e24379.chunk.css.map",
     "static/js/2.118ee2db.chunk.js.LICENSE.txt": "/victor-wong-project-five/static/js/2.118ee2db.chunk.js.LICENSE.txt",
     "static/media/index.css": "/victor-wong-project-five/static/media/bg.4cb866f8.jpg",
     "static/media/checkmark.png": "/victor-wong-project-five/static/media/checkmark.48eb9f97.png",
@@ -26,7 +26,7 @@
   "entrypoints": [
     "static/js/runtime-main.9f7f1305.js",
     "static/js/2.118ee2db.chunk.js",
-    "static/css/main.767dfc61.chunk.css",
+    "static/css/main.88e24379.chunk.css",
     "static/js/main.9ec3b345.chunk.js"
   ]
 }
