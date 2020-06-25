@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import DisplayPoke from './DisplayPoke';
-import MusicControl  from './MusicControl';
+import pikachu from '../assets/images/pikachu.gif'
 import brock from '../assets/images/brock.png'
 import misty from '../assets/images/misty.png'
 import surge from '../assets/images/surge.png'
@@ -19,7 +19,6 @@ class Main extends Component{
     constructor(){
         super()
         this.state = {
-            /* changing */
             userPokeID: 0,
             userTyping: '',
             originLink: 'https://pokeapi.co/api/v2/pokemon/',
@@ -58,8 +57,9 @@ class Main extends Component{
             stageClear6:false,
             stageClear7:false,
             stageClear8:false,
+            easterEgg:false
         }
-      }
+    }
 
 
 audioRestart = new Audio();
@@ -70,7 +70,6 @@ audioRestart = new Audio();
     }
     async componentDidUpdate(prevProps, prevState) {
         if (prevState.originLink !== this.state.originLink) {
-          console.log('pokemons state has changed.')
           axios({
             url: this.state.originLink,
             method: 'GET',
@@ -82,7 +81,7 @@ audioRestart = new Audio();
               pokemonAllData: x.data,
               typeOne: x.data.types[0].type.name,
               loading: false,
-              health: x.data.stats[0].base_stat,
+              health: x.data.stats[0].base_stat
             })
           }).catch(() => {
             this.setState({ typeError: 'I cannot find this pokemon=.=...'})
@@ -95,12 +94,12 @@ audioRestart = new Audio();
             responseType: 'JSON'
           })
             x.data.types.length === 2 ? this.setState ({enemyTypeTwo: x.data.types[1].type.name}): this.setState ({enemyTypeTwo: ''})
-            x.data.id <= 649 ? this.setState ({enemyPokemonCries: 'https://pokemoncries.com/cries-old/' + x.data.id +'.mp3'}): this.setState({enemyPokemonCries:''})
+            await x.data.id <= 649 ? this.setState ({enemyPokemonCries: 'https://pokemoncries.com/cries-old/' + x.data.id +'.mp3'}): this.setState({enemyPokemonCries:''})
             this.setState({
               enemyPokemonAllData: x.data,
               enemyTypeOne: x.data.types[0].type.name,
               enemyLoading: false,
-              enemyHealth: x.data.stats[0].base_stat,
+              enemyHealth: x.data.stats[0].base_stat
             })
         }
     }
@@ -133,62 +132,61 @@ audioRestart = new Audio();
 
     challengeClick = (enemy) => {
         enemy.preventDefault();
-        console.log(enemy.target.value)
         if (enemy.target.value === "Pewter"){
         this.setState({
           enemyLink: 'https://pokeapi.co/api/v2/pokemon/onix',
           enemyPokemonCries: 'https://pokemoncries.com/cries-old/95.mp3',
           enemyTrainer: 'Brock',
-          enemyImage: brock,
+          enemyImage: brock
         })
         }else if(enemy.target.value === "Cerulean"){
             this.setState({
               enemyLink: 'https://pokeapi.co/api/v2/pokemon/starmie',
               enemyPokemonCries: 'https://pokemoncries.com/cries-old/121.mp3',
               enemyTrainer: 'Misty',
-              enemyImage: misty,
+              enemyImage: misty
             })
         }else if(enemy.target.value === "Vermillion"){
             this.setState({
               enemyLink: 'https://pokeapi.co/api/v2/pokemon/raichu',
               enemyPokemonCries: 'https://pokemoncries.com/cries-old/26.mp3',
               enemyTrainer: 'Lt. Surge',
-              enemyImage: surge,
+              enemyImage: surge
             })
         }else if(enemy.target.value === "Celadon"){
             this.setState({
               enemyLink: 'https://pokeapi.co/api/v2/pokemon/gloom',
               enemyPokemonCries: 'https://pokemoncries.com/cries-old/44.mp3',
               enemyTrainer: 'Erika',
-              enemyImage: erika,
+              enemyImage: erika
             })
         }else if(enemy.target.value === "Fuchsia"){
             this.setState({
               enemyLink: 'https://pokeapi.co/api/v2/pokemon/venomoth',
               enemyPokemonCries: 'https://pokemoncries.com/cries-old/49.mp3',
               enemyTrainer: 'Koga',
-              enemyImage: koga,
+              enemyImage: koga
             })
         }else if(enemy.target.value === "Saffron"){
             this.setState({
               enemyLink: 'https://pokeapi.co/api/v2/pokemon/alakazam',
               enemyPokemonCries: 'https://pokemoncries.com/cries-old/65.mp3',
               enemyTrainer: 'Sabrina',
-              enemyImage: sabrina,
+              enemyImage: sabrina
             })
         }else if(enemy.target.value === "Cinnabar"){
             this.setState({
               enemyLink: 'https://pokeapi.co/api/v2/pokemon/arcanine',
               enemyPokemonCries: 'https://pokemoncries.com/cries-old/59.mp3',
               enemyTrainer: 'Blaine',
-              enemyImage: blaine,
+              enemyImage: blaine
             })
         }else if(enemy.target.value === "Viridian"){
             this.setState({
               enemyLink: 'https://pokeapi.co/api/v2/pokemon/rhydon',
               enemyPokemonCries: 'https://pokemoncries.com/cries-old/112.mp3',
               enemyTrainer: 'Giovanni',
-              enemyImage: giovanni,
+              enemyImage: giovanni
             })
         }else{
             const meetWild = this.randomfunction()
@@ -198,14 +196,14 @@ audioRestart = new Audio();
                 enemyLink:'https://pokeapi.co/api/v2/pokemon/' + random,
                 enemyPokemonCries: 'https://pokemoncries.com/cries-old/' + random + '.mp3',
                 enemyTrainer: '',
-                enemyImage: '',
+                enemyImage: ''
             })
             }else{
                 this.setState({
                     enemyLink: 'https://pokeapi.co/api/v2/pokemon/meowth',
                     enemyPokemonCries: 'https://pokemoncries.com/cries-old/52.mp3',
                     enemyTrainer: 'Team Rocket',
-                    enemyImage: teamRocket,
+                    enemyImage: teamRocket
                 })
             }
         }
@@ -245,13 +243,12 @@ audioRestart = new Audio();
             critial : false
         })
         const randomDamage = this.randomfunction()
-        let damage = Math.round(((1.2 * (this.state.pokemonAllData.stats[1].base_stat / this.state.enemyPokemonAllData.stats[2].base_stat)) + 1) * 1.2 * (1.3 + randomDamage))
-        const randomCrit = this.randomfunction()
+        let damage = Math.round(((1.2 * (this.state.pokemonAllData.stats[1].base_stat / this.state.enemyPokemonAllData.stats[2].base_stat + this.state.pokemonAllData.stats[3].base_stat/this.state.enemyPokemonAllData.stats[4].base_stat)) + 1) * 1.2 * (1.2 + randomDamage))
+        const randomCrit = this.randomfunction() + (this.state.pokemonAllData.stats[5].base_stat / 1000)
         if( randomCrit <= 0.2){
             damage = Math.round(damage * 2)
             this.setState ({ critial : true })
         }
-        console.log(randomCrit);
         let copyOfEnemyHealth = this.state.enemyHealth - damage
         this.setState ({ 
             enemyHealth: copyOfEnemyHealth, 
@@ -283,7 +280,6 @@ audioRestart = new Audio();
     }
 
     /* Enemy */
-
     /* enemy choice have 75% chance to attack and 25% chance to heal */
     enemyChoice = () =>{
         if (this.randomfunction() <= 0.75){
@@ -303,8 +299,8 @@ audioRestart = new Audio();
     enemyAttack = () =>{
         this.setState ({ enemyCritial : false })
         const randomDamage = this.randomfunction()
-        let damage = Math.round(((1.2 * (this.state.pokemonAllData.stats[1].base_stat / this.state.enemyPokemonAllData.stats[2].base_stat)) + 1) * (1.3 + randomDamage))
-        const randomCrit = this.randomfunction()
+        let damage = Math.round(((1.2 * (this.state.enemyPokemonAllData.stats[1].base_stat / this.state.pokemonAllData.stats[2].base_stat + this.state.enemyPokemonAllData.stats[3].base_stat/this.state.pokemonAllData.stats[4].base_stat)) + 1) * (1.2 + randomDamage))
+        const randomCrit = this.randomfunction() + (this.state.enemyPokemonAllData.stats[5].base_stat / 1000)
         if( randomCrit <= 0.05){
             damage = Math.round(damage * 2)
             this.setState ({ enemyCritial : true })
@@ -319,7 +315,7 @@ audioRestart = new Audio();
         if( copyOfEnemyHealth <= 0 ){
             this.setState ({ 
                 final: false,
-                disabledUserChoiceButton: true,
+                disabledUserChoiceButton: true
             })
         }
     }
@@ -364,14 +360,19 @@ audioRestart = new Audio();
         this.audioRestart.autoplay = true
     }
 
+    allClear = (e) =>{
+        e.preventDefault()
+        const copyOfEasterEgg = !this.state.easterEgg
+        this.setState({ easterEgg : copyOfEasterEgg})
+    }
+
     render(){
         return(
             <main>
                 <section className="mainSpace">
-                <div>
-                    <h2>Player's Pokemon</h2>
-                    {
-                    this.state.loading ? <p>Choose your Pokemon(Ex. "1" / "bulbasaur")</p>
+                <div className="breathingRoom">
+                    <h2 className="cpuPokemon">Player's Pokemon</h2>
+                    {this.state.loading ? <p>Choose your Pokemon(Ex. "1" / "bulbasaur")</p>
                     : <DisplayPoke
                         key={this.state.pokemonAllData.id}
                         name={this.state.pokemonAllData.name}
@@ -386,8 +387,7 @@ audioRestart = new Audio();
                         type2={this.state.typeTwo}
                         imageSrc={this.state.pokemonAllData.sprites.front_default}
                         audioSrc={this.state.pokemonCries}
-                    />
-                    }
+                    />}
                     <form className="userInputBox" >
                         <input type="text" name='userPokeID' placeholder="I choose you!" onChange={this.userChange} value={this.state.userTyping} disabled={this.state.disabledSelectEnemy} className="inputBoxPlace"/>
                         <input type="submit" value="Throw Pokeball" onClick={this.userClick} disabled={this.state.disabledSelectEnemy} className="wildButton" />
@@ -400,8 +400,7 @@ audioRestart = new Audio();
                         <h2>CPU Pokemon</h2>
                         <button disabled={this.state.disabledSelectEnemy} onClick={this.challengeClick} className="wildButton">Wild Pokemon?</button>
                     </div>
-                    {
-                    this.state.enemyLoading ? <p>Pick you enemy!?</p>  
+                    {this.state.enemyLoading ? <p>Pick you enemy!?</p>  
                     : <DisplayPoke
                         key={'player' + this.state.enemyPokemonAllData.id}
                         name={this.state.enemyPokemonAllData.name}
@@ -416,8 +415,7 @@ audioRestart = new Audio();
                         type2={this.state.enemyTypeTwo}
                         imageSrc={this.state.enemyPokemonAllData.sprites.front_default}
                         audioSrc={this.state.enemyPokemonCries}
-                    />
-                    }
+                    />}
                     <div className="enemyInfo">
                         <img src={this.state.enemyImage} alt={this.state.enemyTrainer}/>
                         {this.state.enemyTrainer !== '' && this.state.enemyTrainer !== 'Team Rocket' ? <p>Gym Leader: {this.state.enemyTrainer}</p> : this.state.enemyTrainer === 'Team Rocket' ? <p>{this.state.enemyTrainer}</p> : null}
@@ -432,10 +430,9 @@ audioRestart = new Audio();
                     enemyDecision={this.state.enemyDecision} enemyDamage={this.state.enemyDamage} enemyCritial={this.state.enemyCritial} enemyHealth={this.state.enemyHealth}
                     /* result */
                     final={this.state.final} restart={this.restart}
+                    /* MusicControl */
+                    enemyTrainer={this.state.enemyTrainer}
                 />
-
-
-                {/* <button onClick={this.enemyAttack}>EnemyAtk</button> */}
                 
                 <MainSubBadge challengeClick={this.challengeClick} disabledSelectEnemy={this.state.disabledSelectEnemy}
                 stageClear1={this.state.stageClear1} stageClear2={this.state.stageClear2}
@@ -443,7 +440,11 @@ audioRestart = new Audio();
                 stageClear5={this.state.stageClear5} stageClear6={this.state.stageClear6}
                 stageClear7={this.state.stageClear7} stageClear8={this.state.stageClear8}
                 />
-                <MusicControl startButton={this.state.startButton} final={this.state.final} enemyTrainer={this.state.enemyTrainer} restart={this.state.restart} />
+
+                 <div className="bonus">
+                 {this.state.stageClear1 ? <button className="wildButton" onClick={this.allClear}>You have won all the badge!</button> : null}
+                 {this.state.easterEgg ? <img className="capture" src={pikachu} alt="pikachu cute emoji gif"></img> : null}
+                 </div>
             </main>
         )
     }

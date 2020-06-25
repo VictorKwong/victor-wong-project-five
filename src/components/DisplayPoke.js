@@ -35,17 +35,3 @@ const DisplayPoke = (data) =>{
 }
 
 export default DisplayPoke;
-
-
-/* key={this.state.pokemonAllData.id}
-name={this.state.pokemonAllData.name}
-id={this.state.pokemonAllData.id}
-hp={this.state.health}
-attack={this.state.attack}
-defence={this.state.defence}
-special={(this.state.specialAtk + this.state.specialDef) / 2}
-speed={this.state.speed}
-type1={this.state.typeOne}
-type2={this.state.typeTwo}
-imageSrc={this.state.sprite}
-audioSrc={this.state.pokemonCries} */

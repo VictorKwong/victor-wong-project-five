@@ -31,58 +31,50 @@ audioTrainer = new Audio();
 audioVictoryTrainer = new Audio();
 
 
-componentDidMount(){
-  this.audioBoss.src = this.state.bossSrc
-  this.audioVictoryBoss.src = this.state.vBossSrc
-  this.audioWild.src = this.state.wildSrc
-  this.audioVictoryWild.src = this.state.vWildSrc
-  this.audioTrainer.src = this.state.trainerSrc
-  this.audioVictoryTrainer.src = this.state.vtrainerSrc
+  componentDidMount(){
+    this.audioBoss.src = this.state.bossSrc
+    this.audioVictoryBoss.src = this.state.vBossSrc
+    this.audioWild.src = this.state.wildSrc
+    this.audioVictoryWild.src = this.state.vWildSrc
+    this.audioTrainer.src = this.state.trainerSrc
+    this.audioVictoryTrainer.src = this.state.vtrainerSrc
 
-
-  
-  this.audioBoss.volume = this.state.volume
-  this.audioVictoryBoss.volume = this.state.volume
-  this.audioWild.volume = this.state.volume
-  this.audioVictoryWild.volume = this.state.volume
-  this.audioTrainer.volume = this.state.volume
-  this.audioVictoryTrainer.volume = this.state.volume
-
-}
+    this.audioBoss.volume = this.state.volume
+    this.audioVictoryBoss.volume = this.state.volume
+    this.audioWild.volume = this.state.volume
+    this.audioVictoryWild.volume = this.state.volume
+    this.audioTrainer.volume = this.state.volume
+    this.audioVictoryTrainer.volume = this.state.volume
+  }
 
 
 
-togglePlayState = () => {
+  togglePlayState = () => {
     this.setState ({ play: !this.state.play })
     this.controlSound();
   }
-    controlSound = () => {
-        console.log(this.audio);
-        if(this.state.play === false){
-            /* this.audio.pause(); */
-            /* this.audio.play(); */
-            /* this.audio.currentTime = this.state.currentTime */
-            /* this.audio.muted = this.state.muted */
-            this.audioBoss.muted = this.state.muted
-            this.audioVictoryBoss.muted = this.state.muted
-            this.audioWild.muted = this.state.muted
-            this.audioVictoryWild.muted = this.state.muted
-            this.audioTrainer.muted = this.state.muted
-            this.audioVictoryTrainer.muted = this.state.muted
-            this.setState ({ muted: true })
-            /* unmute */
-        }else if(this.state.play === true){
-            this.audioBoss.muted = this.state.muted
-            this.audioVictoryBoss.muted = this.state.muted
-            this.audioWild.muted = this.state.muted
-            this.audioVictoryWild.muted = this.state.muted
-            this.audioTrainer.muted = this.state.muted
-            this.audioVictoryTrainer.muted = this.state.muted
-            console.log("audio is playing!");
-            this.setState ({ muted: false })
-            /* mute */
-        }
-    }
+
+  controlSound = () => {
+    if(this.state.play === false){
+      this.audioBoss.muted = this.state.muted
+      this.audioVictoryBoss.muted = this.state.muted
+      this.audioWild.muted = this.state.muted
+      this.audioVictoryWild.muted = this.state.muted
+      this.audioTrainer.muted = this.state.muted
+      this.audioVictoryTrainer.muted = this.state.muted
+      this.setState ({ muted: true })
+        /* unmute */
+    }else if(this.state.play === true){
+      this.audioBoss.muted = this.state.muted
+      this.audioVictoryBoss.muted = this.state.muted
+      this.audioWild.muted = this.state.muted
+      this.audioVictoryWild.muted = this.state.muted
+      this.audioTrainer.muted = this.state.muted
+      this.audioVictoryTrainer.muted = this.state.muted
+      this.setState ({ muted: false })
+        /* mute */
+      }
+  }
 
   volumePlus = () => {
     let copyPlus = this.state.volume + 0.1
@@ -98,7 +90,6 @@ togglePlayState = () => {
     this.audioVictoryWild.volume = copyPlus
     this.audioTrainer.volume = copyPlus
     this.audioVictoryTrainer.volume = copyPlus
-
   }
 
   volumeMinus = () => {
@@ -121,14 +112,17 @@ togglePlayState = () => {
     this.audioBoss.play()
     this.audioBoss.autoplay = true
   }
+
   bossFightEnd = () => {
     this.audioBoss.pause()
     this.audioBoss.currentTime = 0
   }
+
   bossVictory = () => {
     this.audioVictoryBoss.play()
     this.audioVictoryBoss.autoplay = true
   }
+
   bossVictoryEnd = () => {
     this.audioVictoryBoss.pause()
     this.audioVictoryBoss.currentTime = 0
@@ -174,16 +168,12 @@ togglePlayState = () => {
     this.audioVictoryTrainer.currentTime = 0
   }
 
-
-
-  
     render() {
       return (
         <div className="musicPosition">
           {this.state.play ? <span onClick={this.togglePlayState} role="img" aria-label="Sound ON" className="musicIndiv">🔊</span> : <span onClick={this.togglePlayState} role="img" aria-label="Sound OFF" className="musicIndiv">🔈</span>}
           <span onClick={this.volumePlus} role="img" aria-label="VolumeAdd" className="musicIndiv">➕</span>
           <span onClick={this.volumeMinus} role="img" aria-label="VolumeMinus" className="musicIndiv">➖</span>
-
           {/* wild music */}
           {this.props.startButton && this.props.final === '' && this.props.enemyTrainer === '' ? this.wildFight() : this.props.startButton && (this.props.final === true || this.props.final === false)  && this.props.enemyTrainer === '' ? this.wildFightEnd() : null}
           {this.props.startButton && this.props.final === true && this.props.enemyTrainer === '' ? this.wildVictory() : !this.props.startButton ? this.wildVictoryEnd() : null}
