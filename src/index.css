@@ -250,6 +250,13 @@ footer p {
   position: relative;
 }
 
+.enemyUI{
+  text-align: center;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
 .startButton{
   display: flex;
   text-align: center;
@@ -257,12 +264,7 @@ footer p {
   align-items: center;
 }
 
-.enemyUI{
-  text-align: center;
-  display: flex;
-  justify-content: right;
-  align-items: center;
-}
+
 
 .playerUI{
   text-align: center;

@@ -11,13 +11,13 @@ class MainSubBattleUI extends Component{
                     { this.props.pokemonAllData === '' || this.props.enemyPokemonAllData === '' ? <p className="textBox">Pick the pokemon before battle...</p> : null}
                 </div>
                 <div className="enemyUI">
+                    { this.props.startButton === true ? <img src={this.props.enemyPokemonAllData.sprites.front_default} alt={this.props.enemyPokemonAllData.name} /> : null }
                     <div>
                         { this.props.startButton === true && (this.props.enemyHealth >= this.props.enemyPokemonAllData.stats[0].base_stat * 0.5) ? <p>HP:{this.props.enemyHealth}/{this.props.enemyPokemonAllData.stats[0].base_stat}</p>
                         : this.props.startButton === true && (this.props.enemyHealth >= this.props.enemyPokemonAllData.stats[0].base_stat * 0.25) ? <p>HP:<span className="yellowHealth">{this.props.enemyHealth}</span>/{this.props.enemyPokemonAllData.stats[0].base_stat}</p>
                         : this.props.startButton === true && (this.props.enemyHealth < this.props.enemyPokemonAllData.stats[0].base_stat * 0.25) ? <p>HP:<span className="redHealth">{this.props.enemyHealth}</span>/{this.props.enemyPokemonAllData.stats[0].base_stat}</p> : null }
                         { this.props.startButton === true ? <progress value={(this.props.enemyHealth/this.props.enemyPokemonAllData.stats[0].base_stat)*100} max="100"></progress> : null}
                     </div>
-                    { this.props.startButton === true ? <img src={this.props.enemyPokemonAllData.sprites.front_default} alt={this.props.enemyPokemonAllData.name} /> : null }
                 </div>
                 <div className="playerUI">
                     { this.props.startButton === true ? <img src={this.props.pokemonAllData.sprites.front_default} alt={this.props.pokemonAllData.name} /> : null }
