@@ -1,15 +1,19 @@
 #Pseudo Code
 
-MVP:
-* User can input their pokemon (name or id, Ex. Pikachu)
-* Once user submit the their id/pokemon name, componentDidUpdate will use setState to update the data
-* Use the updated variables to show the selected pokemon information
-* Can choose other pokemon if user didn't like their previous Pokemon (unlimited times)
+# Sorry I save over the file from MVP to Pseudo Code
 
+* Create a input box that can let user insert their pokemon (by id "1-807" or by name "pikachu)
+* componentDidMount call the axios and store the data into this.setState pokemonAllData
+* User can repeat the process if he/she dont like the previous pokemon
 
-Strech goals:
-* Create a NPC button also select their pokemon
-* Battle button appears once both pokemon button are selected
-* Once battle button submit, pokemon will compare their status (attack,defence,speed etc)
-* Show the battle result
-
+* (Strech Goals) User can pick their enemy pokemon (wild pokemon, or gym leader)
+* (Strech Goals) componentDidMount call the axios and store the data into this.setState enemyPokemonAllData
+* (Strech Goals) User can repeat the process if he/she dont like the previous enemy pokemon
+* (Strech Goals) When enemy and user pokemon has appear, a "start battle" button will appear
+* (Strech Goals) Once the user click "start battle", it will disabled user input and enemy select button
+* (Strech Goals) User can pick "attack" or "heal" to interact with the enemy pokemon
+* (Strech Goals) Once user click "attack or "heal", this.setState will update if enemy pokemon is dead
+* (Strech Goals) if enemy is not dead, use setTimeout to disable user interface and pass it to enemy turn
+* (Strech Goals) enemy can do "attack","heal" or "nothing", this.setState will update if user pokemon is dead
+* (Strech Goals) if user pokemon or enemy pokemon, this.setState will trigger the result
+* (Strech Goals) Restart button

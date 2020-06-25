@@ -1,14 +1,17 @@
-
+#Pseudo Code
 
 MVP:
-1. Have user input to select their Pokemon
-2. API correct extraction, and show selected Pokemon
-3. User can select other Pokemon
+* User can input their pokemon (name or id, Ex. Pikachu)
+* Once user submit the their id/pokemon name, componentDidUpdate will use setState to update the data
+* Use the updated variables to show the selected pokemon information
+* Can choose other pokemon if user didn't like their previous Pokemon (unlimited times)
 
-Stretch Goals:
-1. Create an NPC that can select their Pokemon
-2. User's Pokemon and NPC Pokemon battle their Pokemon stats
-3. Show Battle result
+
+Strech goals:
+* Create a NPC button also select their pokemon
+* Battle button appears once both pokemon button are selected
+* Once battle button submit, pokemon will compare their status (attack,defence,speed etc)
+* Show the battle result
 
 Reference:
 https://downloads.khinsider.com/game-soundtracks/album/pokemon-yellow-gb
