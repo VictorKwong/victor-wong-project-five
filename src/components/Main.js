@@ -442,7 +442,8 @@ audioRestart = new Audio();
                 />
 
                  <div className="bonus">
-                 {this.state.stageClear1 ? <button className="wildButton" onClick={this.allClear}>You have won all the badge!</button> : null}
+                 {this.state.stageClear1 && this.state.stageClear2 && this.state.stageClear3 && this.state.stageClear4 &&
+                 this.state.stageClear5 && this.state.stageClear6 && this.state.stageClear7 && this.state.stageClear8 ? <button className="wildButton" onClick={this.allClear}>You have won all the badge!</button> : null}
                  {this.state.easterEgg ? <img className="capture" src={pikachu} alt="pikachu cute emoji gif"></img> : null}
                  </div>
             </main>
