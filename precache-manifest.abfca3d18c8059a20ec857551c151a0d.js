@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "23df85378e2c6b2c02b10f1ffad597ed",
+    "revision": "39aea3e67683da31f251832e6dd7cdc2",
     "url": "/victor-wong-project-five/index.html"
   },
   {
-    "revision": "df6aaae13d26c3274217",
-    "url": "/victor-wong-project-five/static/css/main.6655568c.chunk.css"
+    "revision": "fa29a38b62b47c36868b",
+    "url": "/victor-wong-project-five/static/css/main.283bc8f7.chunk.css"
   },
   {
     "revision": "681915520b2429d8d5b9",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/victor-wong-project-five/static/js/2.85a00c4b.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "df6aaae13d26c3274217",
-    "url": "/victor-wong-project-five/static/js/main.8b2b4b14.chunk.js"
+    "revision": "fa29a38b62b47c36868b",
+    "url": "/victor-wong-project-five/static/js/main.af295394.chunk.js"
   },
   {
     "revision": "9a02abdc7fab85ed337f",
