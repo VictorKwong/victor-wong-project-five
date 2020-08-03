@@ -7,7 +7,7 @@ class Header extends Component{
             <header>
                 <div className="pokeBallSize">
                     <img src={pokeball} alt="Pokemon ball"></img>
-                </div>  
+                </div>
                 <h1>Pokemon Battle</h1>
                 <div className="pokeBallSize">
                     <img src={pokeball} alt="Pokemon ball"></img>

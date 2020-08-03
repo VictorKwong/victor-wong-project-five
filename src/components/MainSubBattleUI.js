@@ -16,7 +16,10 @@ class MainSubBattleUI extends Component{
                         { this.props.startButton === true && (this.props.enemyHealth >= this.props.enemyPokemonAllData.stats[0].base_stat * 0.5) ? <p>HP:{this.props.enemyHealth}/{this.props.enemyPokemonAllData.stats[0].base_stat}</p>
                         : this.props.startButton === true && (this.props.enemyHealth >= this.props.enemyPokemonAllData.stats[0].base_stat * 0.25) ? <p>HP:<span className="yellowHealth">{this.props.enemyHealth}</span>/{this.props.enemyPokemonAllData.stats[0].base_stat}</p>
                         : this.props.startButton === true && (this.props.enemyHealth < this.props.enemyPokemonAllData.stats[0].base_stat * 0.25) ? <p>HP:<span className="redHealth">{this.props.enemyHealth}</span>/{this.props.enemyPokemonAllData.stats[0].base_stat}</p> : null }
-                        { this.props.startButton === true ? <progress value={(this.props.enemyHealth/this.props.enemyPokemonAllData.stats[0].base_stat)*100} max="100"></progress> : null}
+                        { this.props.startButton === true && (this.props.enemyHealth >= this.props.enemyPokemonAllData.stats[0].base_stat * 0.5) ? <progress className="greenHP greenHP2" value={(this.props.enemyHealth/this.props.enemyPokemonAllData.stats[0].base_stat)*100} max="100"></progress> 
+                        : this.props.startButton === true && (this.props.enemyHealth >= this.props.enemyPokemonAllData.stats[0].base_stat * 0.25) ? <progress className="yellowHP yellowHP2" value={(this.props.enemyHealth/this.props.enemyPokemonAllData.stats[0].base_stat)*100} max="100"></progress>
+                        : this.props.startButton === true && (this.props.enemyHealth < this.props.enemyPokemonAllData.stats[0].base_stat * 0.25) ? <progress className="redHP redHP2" value={(this.props.enemyHealth/this.props.enemyPokemonAllData.stats[0].base_stat)*100} max="100"></progress>
+                        : null}
                     </div>
                 </div>
                 <div className="playerUI">
@@ -25,7 +28,10 @@ class MainSubBattleUI extends Component{
                         { this.props.startButton === true && (this.props.health >= this.props.pokemonAllData.stats[0].base_stat * 0.5) ? <p>HP:{this.props.health}/{this.props.pokemonAllData.stats[0].base_stat}</p> 
                         : this.props.startButton === true && (this.props.health >= this.props.pokemonAllData.stats[0].base_stat * 0.25) ? <p>HP:<span className="yellowHealth">{this.props.health}</span>/{this.props.pokemonAllData.stats[0].base_stat}</p>
                         : this.props.startButton === true && (this.props.health < this.props.pokemonAllData.stats[0].base_stat * 0.25) ? <p>HP:<span className="redHealth">{this.props.health}</span>/{this.props.pokemonAllData.stats[0].base_stat}</p> : null }
-                        { this.props.startButton === true ? <progress value={(this.props.health/this.props.pokemonAllData.stats[0].base_stat)*100} max="100"></progress> : null}
+                        { this.props.startButton === true && (this.props.health >= this.props.pokemonAllData.stats[0].base_stat * 0.5) ? <progress className="greenHP greenHP2" value={(this.props.health/this.props.pokemonAllData.stats[0].base_stat)*100} max="100"></progress>
+                        : this.props.startButton === true && (this.props.health >= this.props.pokemonAllData.stats[0].base_stat * 0.25) ? <progress className="yellowHP yellowHP2" value={(this.props.health/this.props.pokemonAllData.stats[0].base_stat)*100} max="100"></progress>
+                        : this.props.startButton === true && (this.props.health < this.props.pokemonAllData.stats[0].base_stat * 0.25) ? <progress className="redHP redHP2" value={(this.props.health/this.props.pokemonAllData.stats[0].base_stat)*100} max="100"></progress>
+                        : null}
                     </div>
                 </div>
                 <div className="flexing">
@@ -36,10 +42,10 @@ class MainSubBattleUI extends Component{
                         : this.props.startButton === true && this.props.playerDecision === 'attack' ? <p><span className="styleTextU">{this.props.pokemonAllData.name}</span> deal {this.props.damage} damage!</p>
                         : this.props.startButton === true && this.props.playerDecision === 'heal' ? <p><span className="styleTextU">{this.props.pokemonAllData.name}</span> has heal 5 hp.</p> : null }
                         { this.props.startButton === true && this.props.playerDecision !== '' ? <p>---EnemyTurn---</p> : null}
-                        { this.props.startButton === true && this.props.enemyDecision === 'enemyAtk' && this.props.enemyCritial === true ? <p><span className="styleTextU">{this.props.enemyPokemonAllData.name}</span> deal {this.props.enemyDamage} damage!!! Critical Hit!</p>
-                        : this.props.startButton === true && this.props.enemyDecision === 'enemyAtk' ? <p><span className="styleTextU">{this.props.enemyPokemonAllData.name}</span> deal {this.props.enemyDamage} damage! </p>
-                        : this.props.startButton === true && this.props.enemyDecision === 'enemyHeal' ? <p><span className="styleTextU">{this.props.enemyPokemonAllData.name}</span> has heal 2 hp.</p> 
-                        : this.props.startButton === true && this.props.enemyDecision === 'enemyNothing' ? <p><span className="styleTextU">{this.props.enemyPokemonAllData.name}</span> is Daydreaming! Waste a turn!</p> : null}
+                        { this.props.startButton === true && this.props.enemyDecision === 'enemyAtk' && this.props.enemyCritial === true ? <p>Enemy <span className="styleTextU">{this.props.enemyPokemonAllData.name}</span> deal {this.props.enemyDamage} damage!!! Critical Hit!</p>
+                        : this.props.startButton === true && this.props.enemyDecision === 'enemyAtk' ? <p>Enemy <span className="styleTextU">{this.props.enemyPokemonAllData.name}</span> deal {this.props.enemyDamage} damage! </p>
+                        : this.props.startButton === true && this.props.enemyDecision === 'enemyHeal' ? <p>Enemy <span className="styleTextU">{this.props.enemyPokemonAllData.name}</span> has heal 2 hp.</p> 
+                        : this.props.startButton === true && this.props.enemyDecision === 'enemyNothing' ? <p>Enemy <span className="styleTextU">{this.props.enemyPokemonAllData.name}</span> is Daydreaming! Waste a turn!</p> : null}
                         <Result final={this.props.final}/>
                     </div>
                     <div className="playerSelectChoiceUI">
