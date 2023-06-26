@@ -1,3 +1,10 @@
+## Notes
+
+Pokemon App designed by using React app
+Restful API: https://pokeapi.co/api
+Connect details: import axios into React, handle response (...then, ...catch).
+
+## MORE Details
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
